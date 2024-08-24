@@ -1,0 +1,54 @@
+#include<stdio.h>
+int divide(int a[],int fi,int ei);
+void quick(int a[],int fi,int ei);
+int main()
+{
+	int a[100],i,n;
+	printf("Enter size of array:");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	quick(a,0,n-1);
+	printf("Display array:");
+	for(i=0;i<n;i++)
+	{
+		printf("\t%d",a[i]);
+	}
+}
+int divide(int a[],int fi,int ei)
+{
+	int pivot=a[(fi+ei)/2];
+	int temp;
+	while(fi<=ei)
+	{
+		while(a[fi]<pivot)
+		{
+			fi++;
+		}
+		while(a[ei]>pivot)
+		{
+			ei--;
+		}
+		if(fi<=ei)
+		{
+			temp=a[fi];
+			a[fi]=a[ei];
+			a[ei]=temp;
+			fi++;
+			ei--;
+		}
+	}
+	return fi;
+}
+void quick(int a[],int fi, int ei)
+{
+	if(fi<ei)
+	{
+		int pi=divide(a,fi,ei);
+		quick(a,fi,pi-1);
+		quick(a,pi,ei);
+		
+	}
+}
